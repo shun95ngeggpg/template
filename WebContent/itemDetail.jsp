@@ -9,9 +9,6 @@
 <title>商品詳細</title>
 </head>
 <body>
-	<header>
-		<s:include value="header.jsp" />
-	</header>
-	
+
 </body>
 </html>
