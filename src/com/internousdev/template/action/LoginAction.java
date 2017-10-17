@@ -50,7 +50,7 @@ public class LoginAction extends ActionSupport implements SessionAware{
 	public LoginDAO loginDAO = new LoginDAO();
 
 	/**
-	 * ログイン情報格納IDTO
+	 * ログイン情報格納DTO
 	 */
 	private LoginDTO loginDTO = new LoginDTO();
 
