@@ -81,6 +81,11 @@
 			</s:if>
 		</div>
 	</div>
+
+	<div class="end">
+
+	</div>
+
 	<div id="footer">
 	 	<div id="pr">
 		</div>
