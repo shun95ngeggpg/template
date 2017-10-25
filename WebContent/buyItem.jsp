@@ -69,6 +69,7 @@
 			<p>BuyItem</p>
 		</div>
 		<div>
+		<s:iterator value="loginUserInfoMap.buyItemDTOList" status="count">
 		<s:form action="BuyItemAction">
 			<table>
 				<tr>
@@ -76,7 +77,7 @@
 						<span>商品名</span>
 					</td>
 					<td>
-						<s:property value="loginUserInfoMap.buyItem_name" /><br>
+						<s:property value="loginUserInfoMap.buyItemDTOList[#count.index].itemName" /><br>
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +85,7 @@
 						<span>値段</span>
 					</td>
 					<td>
-						<s:property value="loginUserInfoMap.buyItem_price" /><span>円</span>
+						<s:property value="loginUserInfoMap.buyItemDTOList[#count.index].Price" /><span>円</span>
 					</td>
 				</tr>
 				<tr>
@@ -117,6 +118,7 @@
 				</tr>
 			</table>
 		</s:form>
+		</s:iterator>
 			<div>
 				<p>前画面に戻る場合は<a href='<s:url action="GoHomeAction" />'>こちら</a></p>
 				<p>マイぺージは<a href='<s:url action="MyPageAction" />'>こちら</a></p>

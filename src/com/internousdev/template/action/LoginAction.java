@@ -1,5 +1,6 @@
 package com.internousdev.template.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,11 +77,16 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			result = SUCCESS;
 
 			// アイテム情報を取得
-			BuyItemDTO buyItemDTO = buyItemDAO.getBuyItemInfo();
+			ArrayList<BuyItemDTO> buyItemDTOList = buyItemDAO.getBuyItemInfo();
 			loginUserInfoMap.put("login_user_id",	loginDTO.getLoginId());
+
+			loginUserInfoMap.put("buyItemDTOList",	buyItemDTOList);
+
+			/**
 			loginUserInfoMap.put("id", buyItemDTO.getItemId());
 			loginUserInfoMap.put("buyItem_name", buyItemDTO.getItemName());
 			loginUserInfoMap.put("buyItem_price", buyItemDTO.getPrice());
+			*/
 
 			return result;
 		}
