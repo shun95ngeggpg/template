@@ -1,14 +1,12 @@
 package com.internousdev.template.dto;
 
-import java.math.BigDecimal;
-
 public class BuyItemDTO {
 
 	public int itemId;
 
 	public String itemName;
 
-	public BigDecimal Price;
+	public int price;
 
 	public String type;
 
@@ -42,12 +40,12 @@ public class BuyItemDTO {
 		this.itemName = itemName;
 	}
 
-	public BigDecimal getPrice() {
-		return Price;
+	public int getPrice() {
+		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
-		Price = price;
+	public void setPrice(int price) {
+		this.price = price;
 	}
 
 	public String getType() {

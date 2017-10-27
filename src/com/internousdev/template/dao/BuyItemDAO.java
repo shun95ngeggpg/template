@@ -35,7 +35,7 @@ public class BuyItemDAO {
 				buyItemDTO.setItemId(resultSet.getInt("id"));
 				buyItemDTO.setItemName(resultSet.getString("item_name"));
 				System.out.println(buyItemDTO.getItemName());
-				buyItemDTO.setPrice(resultSet.getBigDecimal("item_price"));
+				buyItemDTO.setPrice(resultSet.getInt("item_price"));
 
 				buyItemDTOList.add(buyItemDTO);
 			}

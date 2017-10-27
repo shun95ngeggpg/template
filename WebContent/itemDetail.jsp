@@ -14,19 +14,17 @@
 			<p>商品詳細</p>
 		</div>
 
-		<s:iterator value="loginUserInfoMap.buyItemDTOList" status="count">
+		<s:iterator value="itemList" status="count">
 			<s:form action="BuyItemAction">
 				<table>
 					<tr>
 						<td><span>商品名</span></td>
-						<td><s:property
-								value="loginUserInfoMap.buyItemDTOList[#count.index].itemName" /><br>
+						<td><s:property	value="ItemName" /><br>
 						</td>
 					</tr>
 					<tr>
 						<td><span>値段</span></td>
-						<td><s:property
-								value="loginUserInfoMap.buyItemDTOList[#count.index].Price" /><span>円</span>
+						<td><s:property value="Price" /><span>円</span>
 						</td>
 					</tr>
 					<tr>

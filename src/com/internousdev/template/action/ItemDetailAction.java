@@ -6,10 +6,12 @@ package com.internousdev.template.action;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.struts2.interceptor.SessionAware;
 
+import com.internousdev.template.dao.BuyItemDAO;
 import com.internousdev.template.dao.ItemDetailDAO;
 import com.internousdev.template.dto.BuyItemDTO;
 import com.opensymphony.xwork2.ActionSupport;
@@ -38,9 +40,19 @@ public class ItemDetailAction extends ActionSupport implements SessionAware {
 	private String img;
 
 	/**
+	 * ログイン情報を格納
+	 */
+	public Map<String, Object> loginUserInfoMap = new HashMap<>();
+
+	/**
+	 * アイテム情報を取得
+	 */
+	public BuyItemDAO buyItemDAO = new BuyItemDAO();
+
+	/**
 	 * 商品一覧表示用リスト
 	 */
-	private ArrayList<BuyItemDTO> displayList = new ArrayList<BuyItemDTO>();
+	private ArrayList<BuyItemDTO> itemList = new ArrayList<BuyItemDTO>();
 
 	private Map<String, Object> session;
 
@@ -52,11 +64,12 @@ public class ItemDetailAction extends ActionSupport implements SessionAware {
 		String result = ERROR;
 
 		ItemDetailDAO dao = new ItemDetailDAO();
-		displayList = dao.select(item_id);
+		itemList = dao.select();
 
-		if(displayList.size() != 0) {
-			this.item_name = displayList.get(0).getItemName();
-			this.img = displayList.get(0).getImg();
+		if(itemList.size() != 0) {
+			this.item_name = itemList.get(0).getItemName();
+			this.img = itemList.get(0).getImg();
+
 
 			result = SUCCESS;
 		}
@@ -120,12 +133,12 @@ public class ItemDetailAction extends ActionSupport implements SessionAware {
 		this.img = img;
 	}
 
-	public ArrayList<BuyItemDTO> getDisplayList() {
-		return displayList;
+	public ArrayList<BuyItemDTO> getItemList() {
+		return itemList;
 	}
 
 	public void setDisplayList(ArrayList<BuyItemDTO> displayList) {
-		this.displayList = displayList;
+		this.itemList = displayList;
 	}
 
 	public Map<String, Object> getSession() {

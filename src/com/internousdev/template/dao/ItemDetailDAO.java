@@ -19,26 +19,22 @@ import com.internousdev.template.util.DBConnector;
  */
 public class ItemDetailDAO {
 
-	public ArrayList<BuyItemDTO> select(int item_id) {
+	public ArrayList<BuyItemDTO> select() {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
-		BuyItemDTO dto = new BuyItemDTO();
 		ArrayList<BuyItemDTO> itemList = new ArrayList<BuyItemDTO>();
-		String sql = "SELECT * FROM item where item_id=?";
+		String sql = "SELECT * FROM item_info_transaction";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, item_id);
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				dto.setItemId(rs.getInt("itemId"));
-				dto.setItemName(rs.getString("itemName"));
-				dto.setPrice(rs.getBigDecimal("Price"));
-				dto.setType(rs.getString("type"));
-				dto.setComment(rs.getString("Comment"));
-				dto.setImg(rs.getString("img"));
-				dto.setQuantity(rs.getInt("quantity"));
+				BuyItemDTO dto = new BuyItemDTO();
+
+				dto.setItemId(rs.getInt("id"));
+				dto.setItemName(rs.getString("item_name"));//DTOのsetItemNameメソッドにrs.getString("item_name")を渡している
+				dto.setPrice(rs.getInt("item_price"));
 				itemList.add(dto);
 			}
 
