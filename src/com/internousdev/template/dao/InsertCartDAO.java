@@ -3,11 +3,11 @@
  */
 package com.internousdev.template.dao;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import com.internousdev.template.dto.CartDTO;
@@ -21,12 +21,13 @@ import com.internousdev.template.util.DBConnector;
  */
 
 public class InsertCartDAO {
+	private LocalDateTime date = null;
 	public ArrayList<SelectCartDTO> itemStatus(int item_id) {
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
 		ArrayList<SelectCartDTO> itemStatus = new ArrayList<SelectCartDTO>();
 
-		String sql = "select * from item where item_id=?";
+		String sql = "select * from item_info_transaction where id=?";
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -36,8 +37,9 @@ public class InsertCartDAO {
 			while(rs.next()) {
 				SelectCartDTO scDto = new SelectCartDTO();
 				scDto.setItem_name(rs.getString("item_name"));
-				scDto.setPrice(rs.getBigDecimal("price"));
-				scDto.setImg(rs.getString("img"));
+				scDto.setPrice(rs.getInt("item_price"));
+				scDto.setOrder_count(rs.getInt("count"));
+				//scDto.setImg(rs.getString("img"));
 
 				itemStatus.add(scDto);
 			}
@@ -56,19 +58,22 @@ public class InsertCartDAO {
 
 
 
-	public int addToCart(int user_id, int item_id, int order_count, BigDecimal price) {
+	@SuppressWarnings("static-access")
+	public int addToCart(int user_id, int item_id, int count, int price) {
 		int addCount = 0;
 
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
-		String sql = "insert into cart(user_id, item_id, order_count, price) values(?,?,?,?)";
+		String sql = "insert into cart(user_id, item_id, count, price, insert_date) values(?,?,?,?,?)";
+
 
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1,  user_id);
+			ps.setInt(1, user_id);
 			ps.setInt(2, item_id);
-			ps.setInt(3, order_count);
-			ps.setBigDecimal(4,  price);
+			ps.setInt(3, count);
+			ps.setInt(4, price);
+			ps.setString(5, date.now().toString());
 			addCount = ps.executeUpdate();
 
 		} catch(SQLException e) {
@@ -116,7 +121,7 @@ public class InsertCartDAO {
 				CartDTO dto = new CartDTO();
 				dto.setUser_id(rs.getInt("user_id"));
 				dto.setItem_id(rs.getInt("item_id"));
-				dto.setOrder_count(rs.getInt("order_count"));
+				dto.setOrder_count(rs.getInt("count"));
 				dto.setCart_id(rs.getInt("cart_id"));
 
 				cartList.add(dto);
@@ -127,8 +132,7 @@ public class InsertCartDAO {
 
 				while(rs.next()) {
 					dto.setItem_name(rs2.getString("item_name"));
-					dto.setPrice(rs2.getBigDecimal("price"));
-					dto.setSub_total(dto.getPrice().multiply(BigDecimal.valueOf(dto.getOrder_count())));
+					dto.setPrice(rs2.getInt("price"));
 					dto.setImg(rs2.getString("img"));
 
 				}

@@ -44,7 +44,7 @@
 						<tr>
 							<td class="img2"><img src="<s:property value="img" />"
 								alt="" width="130" height="100"></td>
-							<td><s:property value="item_name" /></td>
+							<td><s:property value="itemName" /></td>
 
 							<td><fmt:formatNumber value="${price}" pattern="###,###,###" />
 								<s:text name="lang.cart.yen" /></td>

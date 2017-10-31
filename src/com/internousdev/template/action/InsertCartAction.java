@@ -40,7 +40,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	/**
 	 * 商品ID
 	 */
-	private int item_id;
+	private int itemId;
 
 	/**
 	 * 商品名
@@ -50,12 +50,12 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	/**
 	 * 価格
 	 */
-	private BigDecimal price;
+	private int price;
 
 	/**
 	 * 数量
 	 */
-	private int order_count;
+	private int count;
 
 	/**
 	 * セッション
@@ -65,7 +65,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	/**
 	 * 合計金額
 	 */
-	private BigDecimal total_price = BigDecimal.ZERO;
+	private int total_price;
 
 	/**
 	 * カート情報
@@ -104,21 +104,22 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	public String execute() throws SQLException {
 		String result = ERROR;
 
-		if(session.containsKey("userID")) {
-			user_id = (int) session.get("userID");
+		if(session.containsKey("id")) {
+			user_id = (int) session.get("id");
 
 			InsertCartDAO dao = new InsertCartDAO();
 
-			itemStatus = dao.itemStatus(item_id);
+			itemStatus = dao.itemStatus(itemId);
 			this.price = itemStatus.get(0).getPrice();
-			addCount = dao.addToCart(user_id, item_id, order_count, price);
+			addCount = dao.addToCart(user_id, itemId, count, price);
 			cartList = dao.selected(user_id);
+
 
 			if(cartList.size() > 0) {
 				for (int i = 0; i < cartList.size(); i++) {
 
-					total_price = total_price.add(cartList.get(i).getPrice().multiply(BigDecimal.valueOf(cartList.get(i).getOrder_count())));
-
+					//total_price = total_price.add(cartList.get(i).getPrice().multiply(BigDecimal.valueOf(cartList.get(i).getOrder_count())));
+					total_price = cartList.get(i).getPrice() * cartList.get(i).getOrder_count();
 				}
 				result = SUCCESS;
 			}
@@ -162,15 +163,15 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * 商品IDを取得するメソッド
 	 * @return item_id
 	 */
-	public int getItem_id() {
-		return item_id;
+	public int getItemId() {
+		return itemId;
 	}
 	/**
 	 * 商品IDを格納するメソッド
 	 * @param item_id
 	 */
-	public void setItem_id(int item_id) {
-		this.item_id = item_id;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 
 	/**
@@ -191,7 +192,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * 価格を取得するメソッド
 	 * @return price
 	 */
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
@@ -199,7 +200,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * 価格を格納するメソッド
 	 * @param price
 	 */
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -208,7 +209,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * @return order_count
 	 */
 	public int getOrder_count() {
-		return order_count;
+		return count;
 	}
 
 	/**
@@ -216,7 +217,7 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * @param order_count
 	 */
 	public void setOrder_count(int order_count) {
-		this.order_count = order_count;
+		this.count = order_count;
 	}
 
 	/**
@@ -239,14 +240,14 @@ public class InsertCartAction extends ActionSupport implements SessionAware {
 	 * 合計金額を取得するメソッド
 	 * @return total_price
 	 */
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 	/**
 	 * 合計金額を格納するメソッド
 	 * @param total_price
 	 */
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 	/**

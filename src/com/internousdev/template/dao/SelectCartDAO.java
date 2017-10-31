@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.dao;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,7 +13,7 @@ import com.internousdev.template.dto.CartDTO;
 import com.internousdev.template.util.DBConnector;
 
 /**
- * カーと情報を取得するクラス
+ * カート情報を取得するクラス
  * @author Shun Nagao
  *
  */
@@ -47,8 +46,8 @@ public class SelectCartDAO {
 
 				while(rs2.next()) {
 					dto.setItem_name(rs2.getString("item_name"));
-					dto.setPrice(rs2.getBigDecimal("price"));
-					dto.setSub_total(dto.getPrice().multiply(BigDecimal.valueOf(dto.getOrder_count())));
+					dto.setPrice(rs2.getInt("price"));
+					dto.setTotal_price(dto.getPrice() * (dto.getOrder_count()));
 					dto.setImg(rs2.getString("img"));
 
 				}

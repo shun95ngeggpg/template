@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.action;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public class DoPaymentAction extends ActionSupport implements SessionAware {
 
 	private int user_id;
 
-	private BigDecimal total_price=BigDecimal.ZERO;
+	private int total_price;
 
 	private String creditNumber;
 
@@ -72,7 +71,7 @@ public class DoPaymentAction extends ActionSupport implements SessionAware {
 
 						for(int i = 0; i < cartList.size(); i++) {
 
-							total_price = total_price.add(cartList.get(i).getPrice().multiply(BigDecimal.valueOf(cartList.get(i).getOrder_count())));
+							total_price = cartList.get(i).getPrice() * cartList.get(i).getOrder_count();
 
 							//CartDAOに合計金額を格納する
 							CartDTO dto = new CartDTO();
@@ -121,12 +120,12 @@ public class DoPaymentAction extends ActionSupport implements SessionAware {
 	}
 
 
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 
 
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 

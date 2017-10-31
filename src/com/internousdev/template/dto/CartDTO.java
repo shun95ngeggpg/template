@@ -3,8 +3,6 @@
  */
 package com.internousdev.template.dto;
 
-import java.math.BigDecimal;
-
 /**
  * カート情報に関するDTOクラス
  * @author Shun Nagao
@@ -26,11 +24,11 @@ public class CartDTO {
 
 	private String item_name;
 
-	private int order_count;
+	private int count;
 
-	private BigDecimal price;
+	private int price;
 
-	private BigDecimal total_price;
+	private int total_price;
 
 	private String note;
 
@@ -42,7 +40,7 @@ public class CartDTO {
 
 	private String item_category;
 
-	private BigDecimal sub_total;
+	private int sub_total;
 
 	private int purchase_flg;
 
@@ -103,26 +101,26 @@ public class CartDTO {
 	}
 
 	public int getOrder_count() {
-		return order_count;
+		return count;
 	}
 
 	public void setOrder_count(int order_count) {
-		this.order_count = order_count;
+		this.count = order_count;
 	}
 
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 
@@ -166,11 +164,11 @@ public class CartDTO {
 		this.item_category = item_category;
 	}
 
-	public BigDecimal getSub_total() {
+	public int getSub_total() {
 		return sub_total;
 	}
 
-	public void setSub_total(BigDecimal sub_total) {
+	public void setSub_total(int sub_total) {
 		this.sub_total = sub_total;
 	}
 

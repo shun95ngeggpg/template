@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.action;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -28,17 +27,13 @@ public class SelectCartAction extends ActionSupport implements SessionAware {
 
 	private String item_name;
 
-	private BigDecimal price = BigDecimal.ZERO;
-
 	private int order_count;
 
-	private BigDecimal total_price = BigDecimal.ZERO;
+	private int total_price;
 
 	private ArrayList<CartDTO> cartList = new ArrayList<>();
 
 	private Map<String, Object> session;
-
-	private BigDecimal sub_total = BigDecimal.ZERO;
 
 	private String img;
 
@@ -62,7 +57,7 @@ public class SelectCartAction extends ActionSupport implements SessionAware {
 
 			if (cartList.size()>0) {
 				for(int i =0; i < cartList.size(); i++) {
-					total_price = total_price.add(cartList.get(i).getPrice().multiply(BigDecimal.valueOf(cartList.get(i).getOrder_count())));
+					total_price = cartList.get(i).getPrice() * cartList.get(i).getOrder_count();
 
 				}
 				result = SUCCESS;
@@ -102,15 +97,6 @@ public class SelectCartAction extends ActionSupport implements SessionAware {
 	}
 
 
-	public BigDecimal getPrice() {
-		return price;
-	}
-
-
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
-
 
 	public int getOrder_count() {
 		return order_count;
@@ -122,12 +108,12 @@ public class SelectCartAction extends ActionSupport implements SessionAware {
 	}
 
 
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 
 
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 
@@ -149,16 +135,6 @@ public class SelectCartAction extends ActionSupport implements SessionAware {
 
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
-	}
-
-
-	public BigDecimal getSub_total() {
-		return sub_total;
-	}
-
-
-	public void setSub_total(BigDecimal sub_total) {
-		this.sub_total = sub_total;
 	}
 
 

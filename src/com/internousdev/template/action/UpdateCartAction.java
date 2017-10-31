@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.action;
 
-import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -34,11 +33,11 @@ public class UpdateCartAction extends ActionSupport implements SessionAware {
 
 	private String item_name;
 
-	private BigDecimal price = BigDecimal.ZERO;
+	private int price;
 
 	private int order_count;
 
-	private BigDecimal total_price = BigDecimal.ZERO;
+	private int total_price;
 
 	private int updateCount;
 
@@ -68,7 +67,7 @@ public class UpdateCartAction extends ActionSupport implements SessionAware {
 			if (cartList.size() > 0) {
 				for(int i= 0; i < cartList.size(); i++) {
 
-					total_price = total_price.add(cartList.get(i).getPrice().multiply(BigDecimal.valueOf(cartList.get(i).getOrder_count())));
+					total_price = cartList.get(i).getPrice() * cartList.get(i).getOrder_count();
 
 					result = SUCCESS;
 				}
@@ -109,11 +108,11 @@ public class UpdateCartAction extends ActionSupport implements SessionAware {
 		this.item_name = item_name;
 	}
 
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 
@@ -125,11 +124,11 @@ public class UpdateCartAction extends ActionSupport implements SessionAware {
 		this.order_count = order_count;
 	}
 
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 

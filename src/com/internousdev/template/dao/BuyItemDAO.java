@@ -23,13 +23,13 @@ public class BuyItemDAO {
 	 */
 	public ArrayList<BuyItemDTO> getBuyItemInfo() {
 
-		String sql = "SELECT id, item_name, item_price FROM item_info_transaction";
+		String sql = "SELECT id, item_name, item_price FROM item_info_transaction ";
 
 		try {
 			PreparedStatement preparedStatement = connection.prepareStatement(sql);
 			ResultSet resultSet = preparedStatement.executeQuery();
 
-			while(resultSet.next()) {
+			if(resultSet.next()) {
 				BuyItemDTO buyItemDTO = new BuyItemDTO();
 
 				buyItemDTO.setItemId(resultSet.getInt("id"));

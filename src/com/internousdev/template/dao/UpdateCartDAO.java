@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.dao;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -18,7 +17,7 @@ import com.internousdev.template.util.DBConnector;
  *
  */
 public class UpdateCartDAO {
-	public int updateCart(int cart_id, int user_id, int order_count, BigDecimal price) {
+	public int updateCart(int cart_id, int user_id, int order_count, int price) {
 		int count = 0;
 		DBConnector db = new DBConnector();
 		Connection con = db.getConnection();
@@ -27,7 +26,7 @@ public class UpdateCartDAO {
 		try {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1,  order_count);
-			ps.setBigDecimal(2, price);
+			ps.setInt(2, price);
 			ps.setInt(3, user_id);
 			ps.setInt(4,  cart_id);
 			count = ps.executeUpdate();

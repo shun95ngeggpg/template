@@ -38,6 +38,17 @@ insert_date datetime,
 delete_date datetime
 );
 
+drop table if exists cart;
+
+create table cart(
+cart_id int not null primary key auto_increment,
+user_id int not null,
+item_id int,
+count int,
+price int,
+insert_date datetime,
+update_date datetime
+);
 
 INSERT INTO item_info_transaction(item_name, item_price, item_stock) VALUES("ノートBook", 100, 50);
 INSERT INTO login_user_transaction(login_id, login_pass, user_name) VALUES("internous", "internous01", "test");

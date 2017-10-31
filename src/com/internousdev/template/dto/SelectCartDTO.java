@@ -3,8 +3,6 @@
  */
 package com.internousdev.template.dto;
 
-import java.math.BigDecimal;
-
 /**
  * カート情報を格納・取得するクラス
  * @author Shun Nagao
@@ -16,7 +14,7 @@ public class SelectCartDTO {
 
 	private String item_name;
 
-	private BigDecimal price;
+	private int price;
 
 	private int order_count;
 
@@ -41,11 +39,11 @@ public class SelectCartDTO {
 		this.item_name = item_name;
 	}
 
-	public BigDecimal getPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigDecimal price) {
+	public void setPrice(int price) {
 		this.price = price;
 	}
 

@@ -15,7 +15,8 @@
 		</div>
 
 		<s:iterator value="itemList" status="count">
-			<s:form action="BuyItemAction">
+			<s:form action="InsertCartAction">
+			<input type="hidden" name="itemId" value="<s:property value='itemId' />" />
 				<table>
 					<tr>
 						<td><span>商品名</span></td>
@@ -44,16 +45,13 @@
 							value="2">クレジットカード</td>
 					</tr>
 					<tr>
-						<td><s:submit value="購入" /></td>
+						<td><s:submit value="カートに入れる" /></td>
 					</tr>
 				</table>
 			</s:form>
 		</s:iterator>
 
 		<div id="text-center">
-			<s:form action="InsertCartAction">
-				<s:submit value="カートに入れる" />
-			</s:form>
 
 			<s:form action="SelectCartAction">
 				<s:submit value="カートへ" />

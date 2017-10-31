@@ -3,7 +3,6 @@
  */
 package com.internousdev.template.action;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -33,7 +32,7 @@ public class PayCompAction extends ActionSupport implements SessionAware {
 
 	private Date purchase_date;
 
-	private BigDecimal total_price;
+	private int total_price;
 
 
 	/**
@@ -117,12 +116,12 @@ public class PayCompAction extends ActionSupport implements SessionAware {
 	}
 
 
-	public BigDecimal getTotal_price() {
+	public int getTotal_price() {
 		return total_price;
 	}
 
 
-	public void setTotal_price(BigDecimal total_price) {
+	public void setTotal_price(int total_price) {
 		this.total_price = total_price;
 	}
 
